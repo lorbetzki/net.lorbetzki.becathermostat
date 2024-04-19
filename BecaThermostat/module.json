@@ -1,0 +1,20 @@
+{
+    "id": "{984846E7-E6AE-5E45-033F-FC1F2142CB39}",
+    "name": "Beca Thermostat",
+    "type": 3,
+    "vendor": "Beca",
+    "aliases": [
+        "BHT-3000",
+        "BHT-6000",
+        "BHT-002"
+    ],
+    "parentRequirements": [
+        "{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}"
+    ],
+    "prefix": "BECAWT",
+    "url": ""
+}

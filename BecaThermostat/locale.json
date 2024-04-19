@@ -1,0 +1,22 @@
+{
+    "translations": {
+        "de": {
+            "IP Address": "IP Adresse",
+            "firmware version": "Firmware Version",
+            "actually temperature": "Aktuelle Temperatur",
+            "target temperature": "Ziel Temperatur",
+            "power":"Betriebsart",
+            "schedule mode":"Kalendermodus",
+            "eco mode":"Eco Modus",
+            "locked":"gesperrt",
+            "state":"Heizmodus",
+            "floor temperature":"Boden Temperatur",
+            "fan mode":"Lüftermodus",
+            "system mode":"Systemmodus",
+            "Alive":"letztes Lebenszeichen",
+            "url":"URL",
+            "stateTopic":"stateTopic",
+            "setTopic":"setTopic"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "id": "{6B3EAA84-0D04-C1F9-24A7-CF018E54BE48}",
+    "name": "Beca Thermostat",
+    "author": "Kristian Lorbetzki",
+    "url": "https://github.com/lorbetzki/net.lorbetzki.becathermostat.git",
+    "compatibility": {
+        "version": "7.1"
+    },
+    "version": "1.0",
+    "build": 0,
+    "date": 0
+}

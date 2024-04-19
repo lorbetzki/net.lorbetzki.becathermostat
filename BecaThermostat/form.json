@@ -1,0 +1,26 @@
+{
+    "elements": [
+        { 
+            "type": "Label",
+            "caption": "type in your Topic, you found it on the WebUI of the Hardware."
+        },
+        { 
+            "type": "ValidationTextBox", 
+            "name": "Topic",
+            "caption": "Topic" 
+        }
+    ],
+    "actions": [
+        {
+            "name": "Text",
+            "type": "ValidationTextBox",
+            "caption": "Text"
+        },
+        {
+            "type": "Button",
+            "caption": "Send",
+            "onClick": "BECAWT_Send($id, $Text);"
+        }
+    ],
+    "status": []
+}
