@@ -25,6 +25,11 @@ declare(strict_types=1);
 				IPS_SetVariableProfileText('Beca.Temperature', "", " °C");
 				IPS_SetVariableProfileValues("Beca.Temperature", 15, 30, 0.5);
 			}
+			if (!IPS_VariableProfileExists('Beca.Alive')) {
+				IPS_CreateVariableProfile('Beca.Alive', 0);
+				IPS_SetVariableProfileAssociation('Beca.Alive', 0, $this->Translate('no'), '', 0xFF0000);
+				IPS_SetVariableProfileAssociation('Beca.Alive', 1, $this->Translate('yes'), '', 0x00FF00);
+			}
 		}
 
 		public function Destroy()
@@ -77,13 +82,40 @@ declare(strict_types=1);
 
 		public function RequestAction($Ident, $Value = NULL)
 		{
-			switch ($Ident) {
-				case 'requestReloadData':
-					$Topic = 'e3dc/set/wallbox/index';
-					$Payload = strval($value);
+			$Topic = $this->ReadPropertyString('Topic');
+
+			switch($Ident)
+			{
+				case 'deviceOn':
+					$Topic = $Topic.'/thermostat/set/'.$Ident;
+					$Payload = json_encode($Value);
+					$this->SendDebug(__FUNCTION__,"Topic: ".$Topic." Payload: ".$Payload, 0);
+					$this->sendMQTT($Topic, $Payload);
+				break;
+				case 'targetTemperature':
+					$Topic = $Topic.'/thermostat/set/'.$Ident;
+					$Payload = json_encode($Value);
+					$this->SendDebug(__FUNCTION__,"Topic: ".$Topic." Payload: ".$Payload, 0);
+					$this->sendMQTT($Topic, $Payload);
+				break;
+				case 'schedulesMode':
+					$Topic = $Topic.'/thermostat/set/'.$Ident;
+					if ($Value == 0)
+					{
+						$Value = "off";
+						$this->EnableAction('targetTemperature');
+					}
+					else
+					{
+						$Value = "auto";
+						$this->DisableAction('targetTemperature');
+					}
+					$Payload = json_encode($Value);
+					$this->SendDebug(__FUNCTION__,"Topic: ".$Topic." Payload: ".$Payload, 0);
 					$this->sendMQTT($Topic, $Payload);
 				break;
 			}
+
 		}
 
 		private function CheckDB($data)
@@ -99,7 +131,7 @@ declare(strict_types=1);
 				//  Topicpath(0), Description(1), Type(2), SymconProfile(3), Action(4), hide(5)
 				$DP_Path 	= $Datapoint['0'];
 				$DP_Desc 	= $Datapoint['1'];
-				$DP_Type 	= $Datapoint['2'];
+				$DP_DataType= $Datapoint['2'];
 				$DP_Profile = $Datapoint['3'];
 				$DP_Action 	= $Datapoint['4'];
 				$DP_Hide 	= $Datapoint['5'];
@@ -117,22 +149,6 @@ declare(strict_types=1);
 				if (!$DP_Hide)
 				{
 					$this->SendDebug("Value:","Set ".$DP_Path." to Value ".$DP_Value, 0);
-				}
-
-				switch ($DP_Type)
-				{
-					case "BOOL":
-						$DP_DataType = 0;
-					break;
-					case "INT":
-						$DP_DataType = 1;
-					break;
-					case "FLOAT":
-						$DP_DataType = 2;
-					break;
-					case "STRING":
-						$DP_DataType = 3;
-					break;
 				}
 
 				// for some values we need to change the type

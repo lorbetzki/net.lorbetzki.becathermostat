@@ -13,10 +13,13 @@
             "floor temperature":"Boden Temperatur",
             "fan mode":"Lüftermodus",
             "system mode":"Systemmodus",
-            "Alive":"letztes Lebenszeichen",
+            "Online":"Online",
             "url":"URL",
             "stateTopic":"stateTopic",
-            "setTopic":"setTopic"
+            "setTopic":"setTopic",
+            "type in your Topic, you found it on the WebUI of the Hardware.":"bitte geben Sie den Topic an, diese befindet sich im webui der Hardware.",
+            "yes":"ja",
+            "no":"nein"
         }
     }
 }
