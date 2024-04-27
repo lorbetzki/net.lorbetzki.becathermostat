@@ -159,9 +159,11 @@ declare(strict_types=1);
 						{
 							case 'off':
 								$DP_Value = 0;
+								$this->EnableAction('targetTemperature');
 							break;
 							case 'auto':
 								$DP_Value = 1;
+								$this->DisableAction('targetTemperature');
 							break;
 						}
 					break;
